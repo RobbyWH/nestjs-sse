@@ -1,8 +1,7 @@
 import { HttpService } from '@nestjs/axios';
-import { ConsoleLogger, Injectable } from '@nestjs/common';
-import { interval, Observable, map, from, lastValueFrom, of } from 'rxjs';
+import { Injectable } from '@nestjs/common';
+import { interval, Observable, map, from } from 'rxjs';
 import { PrismaService } from './prisma.service';
-import { Todo } from '@prisma/client';
 
 export interface MessageEvent {
   data: string | object;
@@ -51,7 +50,7 @@ export class AppService {
     return from(todoObj).pipe(
       map((todo) => {
         console.log('Todo', todo);
-        return { data: todo, retry: 10000, id, type: 'todo' };
+        return { data: todo, retry: 10000, id: '123', type: 'todo' };
       }),
     );
   }
