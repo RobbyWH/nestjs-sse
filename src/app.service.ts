@@ -5,7 +5,10 @@ import { PrismaService } from './prisma.service';
 import { Todo } from '@prisma/client';
 
 export interface MessageEvent {
-  data: string | object | Todo;
+  data: string | object;
+  id?: string;
+  type?: string;
+  retry?: number;
 }
 
 @Injectable()
@@ -48,7 +51,7 @@ export class AppService {
     return from(todoObj).pipe(
       map((todo) => {
         console.log('Todo', todo);
-        return { data: todo, retry: 10000 };
+        return { data: todo, retry: 10000, id, type: 'todo' };
       }),
     );
   }
